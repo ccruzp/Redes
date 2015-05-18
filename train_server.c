@@ -26,14 +26,14 @@ is_wagon_full_1_svc(void *argp, struct svc_req *rqstp)
   return &result;
 }
 
-available *
+seat *
 is_seat_taken_1_svc(seat *argp, struct svc_req *rqstp)
 {
-	static available result;
-	result.available_val = malloc(sizeof(seat)*40);
+	static seat *result;
+	result = malloc(sizeof(seat)*40);
 	for(i = 0; i < 40; ++i) {
-	  result.available_val[i].row = i;
-	  result.available_val[i].col = i;
+	  result[i].row = i;
+	  result[i].col = i;
 	  /* printf("ASIENTO: (%d, %d)\n", result.available_val[i].row, result.available_val[i].col); */
 	}
 	/* seat list[seatsAvailable]; */
@@ -47,8 +47,8 @@ is_seat_taken_1_svc(seat *argp, struct svc_req *rqstp)
 	      /* s = {i, j}; */
 	      /* printf("%d ", seats[i][j]); */
 	      /* fflush(stdout); */
-	      result.available_val[k].row = i;
-	      result.available_val[k].col = j;
+	      result[k].row = i;
+	      result[k].col = j;
 	      /* printf("HOLA: %d %d\n", result.available_val[k].row, result.available_val[k].col); */
 	      ++k;
 	    }
@@ -66,7 +66,7 @@ is_seat_taken_1_svc(seat *argp, struct svc_req *rqstp)
 	/*   } */
 	/* } */
 	/* result.list = list; */
-	return &result;
+	return result;
 }
 
 int *

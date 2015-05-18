@@ -22,10 +22,7 @@ struct seat {
 };
 typedef struct seat seat;
 
-typedef struct {
-	u_int available_len;
-	seat *available_val;
-} available;
+typedef seat available[40];
 
 #define TRAIN 0x31111111
 #define TRAIN_VERS 1
@@ -35,8 +32,8 @@ typedef struct {
 extern  int * is_wagon_full_1(void *, CLIENT *);
 extern  int * is_wagon_full_1_svc(void *, struct svc_req *);
 #define is_seat_taken 2
-extern  available * is_seat_taken_1(seat *, CLIENT *);
-extern  available * is_seat_taken_1_svc(seat *, struct svc_req *);
+extern  seat * is_seat_taken_1(seat *, CLIENT *);
+extern  seat * is_seat_taken_1_svc(seat *, struct svc_req *);
 #define reserve_seat 3
 extern  int * reserve_seat_1(seat *, CLIENT *);
 extern  int * reserve_seat_1_svc(seat *, struct svc_req *);
@@ -47,8 +44,8 @@ extern int train_1_freeresult (SVCXPRT *, xdrproc_t, caddr_t);
 extern  int * is_wagon_full_1();
 extern  int * is_wagon_full_1_svc();
 #define is_seat_taken 2
-extern  available * is_seat_taken_1();
-extern  available * is_seat_taken_1_svc();
+extern  seat * is_seat_taken_1();
+extern  seat * is_seat_taken_1_svc();
 #define reserve_seat 3
 extern  int * reserve_seat_1();
 extern  int * reserve_seat_1_svc();
@@ -59,7 +56,7 @@ extern int train_1_freeresult ();
 
 #if defined(__STDC__) || defined(__cplusplus)
 extern  bool_t xdr_seat (XDR *, seat*);
-extern  bool_t xdr_available (XDR *, available*);
+extern  bool_t xdr_available (XDR *, available);
 
 #else /* K&R C */
 extern bool_t xdr_seat ();

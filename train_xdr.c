@@ -18,11 +18,11 @@ xdr_seat (XDR *xdrs, seat *objp)
 }
 
 bool_t
-xdr_available (XDR *xdrs, available *objp)
+xdr_available (XDR *xdrs, available objp)
 {
 	register int32_t *buf;
 
-	 if (!xdr_array (xdrs, (char **)&objp->available_val, (u_int *) &objp->available_len, 40,
+	 if (!xdr_vector (xdrs, (char *)objp, 40,
 		sizeof (seat), (xdrproc_t) xdr_seat))
 		 return FALSE;
 	return TRUE;

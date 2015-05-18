@@ -6,7 +6,7 @@ struct seat {
        int col;
 };
 
-typedef seat available<40>;
+typedef seat available[40];
 
 program TRAIN {
 	version TRAIN_VERS {

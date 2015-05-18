@@ -24,19 +24,19 @@ is_wagon_full_1(void *argp, CLIENT *clnt)
 	return (&clnt_res);
 }
 
-available *
+seat *
 is_seat_taken_1(seat *argp, CLIENT *clnt)
 {
 	static available clnt_res;
 
-	memset((char *)&clnt_res, 0, sizeof(clnt_res));
+	memset((char *)clnt_res, 0, sizeof(clnt_res));
 	if (clnt_call (clnt, is_seat_taken,
 		(xdrproc_t) xdr_seat, (caddr_t) argp,
-		(xdrproc_t) xdr_available, (caddr_t) &clnt_res,
+		(xdrproc_t) xdr_available, (caddr_t) clnt_res,
 		TIMEOUT) != RPC_SUCCESS) {
 		return (NULL);
 	}
-	return (&clnt_res);
+	return (clnt_res);
 }
 
 int *

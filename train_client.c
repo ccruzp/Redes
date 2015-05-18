@@ -28,30 +28,48 @@ train_1(char *host, char *row, char *col)
 	}
 #endif	/* DEBUG */
 
-	result_1 = is_wagon_full_1((void*)&is_wagon_full_1_arg, clnt);
-	if (result_1 == (int *) NULL) {
-		clnt_perror (clnt, "call failed");
+	if (result_1 = is_wagon_full_1((void*)&is_wagon_full_1_arg, clnt)) {
+	  if (result_1 == (int *) NULL) {
+	    clnt_perror (clnt, "call failed");
+	  }
+	  result_2 = is_seat_taken_1(&reserve_seat_1_arg, clnt);
+	  /* while (result_2 != (seat *) NULL) { */
+	  /* clnt_perror (clnt, "call failed"); */
+	  /* while((result_2 = is_seat_taken_1(&reserve_seat_1_arg, clnt)) != (seat *) NULL) { */
+	  while(result_2[0].row != -1 && result_2[0].col != -1) {
+	    int i;
+	    printf("Ocupado\n");
+	    printf("Los siguientes asientos están disponibles: ");
+	    fflush(stdout);
+	    for(i = 0; i < 30; ++i) {
+	      printf("(%d, %d)\n", result_2[i].row, result_2[i].col);
+	    }
+	    
+	    printf("Introduzca la fila del asiento que desea:");
+	    fscanf(stdin, "%d", &reserve_seat_1_arg.row);
+	    --reserve_seat_1_arg.row;
+	    printf("Introduzca la columna del asiento que desea: ");
+	    fscanf(stdin, "%d", &reserve_seat_1_arg.col);	  
+	    --reserve_seat_1_arg.col;
+	    result_2 = is_seat_taken_1(&reserve_seat_1_arg, clnt);
+	  }
+	  result_3 = reserve_seat_1(&reserve_seat_1_arg, clnt);
+	  if (result_3 == (int *) NULL) {
+	    clnt_perror (clnt, "call failed");
+	  }
+	  /* result_3 = reserve_seat_1(&reserve_seat_1_arg, clnt); */
+	  /* if (result_3 == (int *) NULL) { */
+	  /* 	clnt_perror (clnt, "call failed"); */
+	  /* } */
+	  if (result_3) printf("Reserva exitosa\n");
+	  else printf("Reserva fallida\n");
+	  /* int i; */
+	  /* for(i = 0; i < 40; ++i) { */
+	  /*   printf("VACIO: (%d, %d)\n", result_2[i].row, result_2[i].col); */
+	  /* } */
+	} else {
+	  printf("El vagón está lleno\n");
 	}
-	result_2 = is_seat_taken_1(&reserve_seat_1_arg, clnt);
-	if (result_2 == (seat *) NULL) {
-		clnt_perror (clnt, "call failed");
-	}
-	/* result_3 = reserve_seat_1(&reserve_seat_1_arg, clnt); */
-	/* if (result_3 == (int *) NULL) { */
-	/* 	clnt_perror (clnt, "call failed"); */
-	/* } */
-	/* printf("El vagón está lleno? %d\n", *result_1); */
-	int i;
-	/* available r = *result_2; */
-	/* seat s; */
-	/* seat *s = (seat)r.list; */
-	/* printf("OLA BALE"); */
-	/* fflush(stdout); */
-	for(i = 0; i < 40; ++i) {
-	/*   S = r.available_val[i]; */
-	  printf("VACIO: (%d, %d)\n", result_2[i].row, result_2[i].col);
-	}
-	/* printf("RESERVA: %d\n", *result_3); */
 #ifndef	DEBUG
 	clnt_destroy (clnt);
 #endif	 /* DEBUG */

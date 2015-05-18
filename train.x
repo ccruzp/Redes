@@ -6,8 +6,12 @@ struct seat {
        int col;
 };
 
+typedef seat available<40>;
+
 program TRAIN {
 	version TRAIN_VERS {
-		int reserve_seat(seat) = 1;
+		int is_wagon_full() = 1;
+		available is_seat_taken(seat) = 2;
+		int reserve_seat(seat) = 3;
 	} = 1;
 } = 0x31111111;

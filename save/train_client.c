@@ -36,18 +36,16 @@ train_1(char *host, char *row, char *col)
 	if (result_2 == (available *) NULL) {
 		clnt_perror (clnt, "call failed");
 	}
-	/* result_3 = reserve_seat_1(&reserve_seat_1_arg, clnt); */
-	/* if (result_3 == (int *) NULL) { */
-	/* 	clnt_perror (clnt, "call failed"); */
-	/* } */
-	/* printf("El vagón está lleno? %d\n", *result_1); */
-	int i;
+	result_3 = reserve_seat_1(&reserve_seat_1_arg, clnt);
+	if (result_3 == (int *) NULL) {
+		clnt_perror (clnt, "call failed");
+	}
+	/* printf("El vagón está lleno? %d", *result_1); */
+	/* int i; */
 	/* available r = *result_2; */
 	/* seat *s = (seat)r.list; */
-	printf("OLA BALE");
-	fflush(stdout);
-	/* for(i = 0; i < 40; ++i) { */
-	  printf("VACIO: (%d, %d)\n", result_2->available_val[0].row, result_2->available_val[0].col);
+	/* for(i = 0; i < *result_1; ++i) { */
+	/*   printf("VACIO: (%d, %d)\n", result_2->list, result_2->list); */
 	/* } */
 	/* printf("RESERVA: %d\n", *result_3); */
 #ifndef	DEBUG

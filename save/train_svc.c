@@ -96,7 +96,13 @@ main (int argc, char **argv)
 		fprintf (stderr, "%s", "unable to register (TRAIN, TRAIN_VERS, tcp).");
 		exit(1);
 	}
-
+	int i, j;
+	int seats[MAX_ROW][MAX_COL];
+	for(i = 0; i < MAX_ROW; ++i) {
+	  for(j = 0; j < MAX_COL; ++j) {
+	    seats[i][j] = 0;
+	  }
+	}
 	svc_run ();
 	fprintf (stderr, "%s", "svc_run returned");
 	exit (1);

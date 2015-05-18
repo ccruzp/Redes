@@ -22,10 +22,13 @@ struct seat {
 };
 typedef struct seat seat;
 
-typedef struct {
-	u_int available_len;
-	seat *available_val;
-} available;
+struct available {
+	struct {
+		u_int list_len;
+		int *list_val;
+	} list;
+};
+typedef struct available available;
 
 #define TRAIN 0x31111111
 #define TRAIN_VERS 1

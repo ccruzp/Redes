@@ -22,8 +22,8 @@ xdr_available (XDR *xdrs, available *objp)
 {
 	register int32_t *buf;
 
-	 if (!xdr_array (xdrs, (char **)&objp->available_val, (u_int *) &objp->available_len, 40,
-		sizeof (seat), (xdrproc_t) xdr_seat))
+	 if (!xdr_array (xdrs, (char **)&objp->list.list_val, (u_int *) &objp->list.list_len, ~0,
+		sizeof (int), (xdrproc_t) xdr_int))
 		 return FALSE;
 	return TRUE;
 }
